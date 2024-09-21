@@ -35,6 +35,16 @@ a {
   text-decoration: none;
 }
 
+button {
+border: 0;
+background: unset;
+cursor: pointer;
+}
+button:hover{
+  background: #f3f3f3;
+  border-radius: 3px;
+}
+
 @media (prefers-color-scheme: light) {
   html {
     color-scheme: light;
@@ -46,4 +56,12 @@ a {
   padding: 12px;
   width: 130px;
   border-radius: 8px;
+}
+
+.img-container{
+display: contents;
+}
+
+.img-container img {
+  padding: 0;
 }
