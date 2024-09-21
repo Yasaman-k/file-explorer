@@ -7,13 +7,12 @@ export default function Home() {
       <main>
         <div style={{ display: "flex", alignItems: 'center', gap: '20px' }}>
 
-
           <div className="box-style" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <Image src={`folder.svg`} alt={'add-file'} width="15" height="15" />
             <span> Root</span>
           </div>
 
-          <ActionIcon />
+          <ActionIcon deleteItem={false} />
         </div>
       </main >
 
