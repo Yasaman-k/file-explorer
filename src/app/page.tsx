@@ -1,13 +1,15 @@
-import styles from "./page.module.css";
+import ActionIcon from "./component/actionIcon";
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
+    <div style={{ padding: '4rem' }}>
+      <main>
+        <div style={{ display: "flex", alignItems: 'center' }}>
+          <div className="box-style">Root</div>
+          <ActionIcon />
+        </div>
+      </main >
 
-        <div className="box-style">hi</div>
-      </main>
-
-    </div>
+    </div >
   );
 }
