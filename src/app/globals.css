@@ -36,11 +36,11 @@ a {
 }
 
 button {
-border: 0;
-background: unset;
-cursor: pointer;
+  border: 0;
+  background: unset;
+  cursor: pointer;
 }
-button:hover{
+button:hover {
   background: #f3f3f3;
   border-radius: 3px;
 }
@@ -51,17 +51,26 @@ button:hover{
   }
 }
 
-.box-style{
+.box-style {
   box-shadow: -1px 3px 8px 0 rgba(0, 0, 0, 0.2), 0px 5px 6px 0px rgb(0 0 0 / 74%);
   padding: 12px;
   width: 130px;
   border-radius: 8px;
 }
 
-.img-container{
-display: contents;
+.img-container {
+  display: contents;
 }
 
 .img-container img {
   padding: 0;
 }
+
+.modal-container {
+  background-color: #171717;
+  height: 100vh;
+  width: 100vw;
+  transform: 50% 50%;
+}
+
+/* MODAL CSS */
