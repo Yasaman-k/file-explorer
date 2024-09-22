@@ -10,6 +10,7 @@ import Image from 'next/image'
 
 const TreeComponent: React.FC = () => {
     const { treeData, setTreeData, setInputName, inputName, setIsCreatingItem } = useTreeData();
+    console.log(treeData);
 
     // Example: Initialize tree data
     useEffect(() => {
@@ -46,7 +47,10 @@ const TreeComponent: React.FC = () => {
 
                     {node.name !== '' ?
                         <div onClick={() => { updateIconVisible(treeData, node.id, !node.visibleIcon) }}>
-                            <BoxItem text={node.name} image={(node.type === 'file' ? ((node.suffix !== 'txt' || 'html') && 'txt') : node.type) + '.svg'} />
+                            <BoxItem
+                                text={node.name}
+                                image={(node.type === 'file' ? (node.suffix !== 'txt' && node.suffix !== 'html' ? 'txt' : node.suffix) : node.type) + '.svg'}
+                            />
                         </div>
 
                         : <div className='input-box flex'>

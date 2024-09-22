@@ -12,7 +12,6 @@ interface Props {
 }
 
 const ActionIcon: React.FC<Props> = ({ addFile = true, addFolder = true, deleteItem = true, nodeId }) => {
-
     const { setTreeData, inputName, setIsCreatingItem, isCreatingItem } = useTreeData();
 
     const handleAddNode = (parentId: number, nodeName: string, type: 'file' | 'folder') => {
@@ -30,7 +29,6 @@ const ActionIcon: React.FC<Props> = ({ addFile = true, addFolder = true, deleteI
     const handleRemoveNode = (nodeId: number) => {
         setTreeData((prevTree: any) => removeNode(prevTree, nodeId));
     };
-
 
     return (
         <div className='img-container'>
