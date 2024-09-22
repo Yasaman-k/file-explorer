@@ -3,6 +3,6 @@ export type TreeNode = {
   name: string;
   children: TreeNode[];
   type: 'file' | 'folder';
-  visibleIcon: boolean;
+  visibleIcon?: boolean;
   suffix?: 'html' | 'txt' | string;
 };
