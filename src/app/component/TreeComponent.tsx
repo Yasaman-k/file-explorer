@@ -9,7 +9,7 @@ import ActionIcon from './ActionIcon';
 import { useTreeData } from '../context/TreeContext';
 
 const TreeComponent: React.FC = () => {
-    const { treeData, setTreeData, setInputName, inputName, isInputVisible, setIsInputVisible } = useTreeData();
+    const { treeData, setTreeData, setInputName, inputName, isCreatingItem, setIsCreatingItem } = useTreeData();
 
 
     // Example: Initialize tree data
@@ -18,8 +18,14 @@ const TreeComponent: React.FC = () => {
         setTreeData(initialTree);
     }, [setTreeData]);
 
+
+    console.log(treeData, 'all nodes');
+
     const handleUpdateNode = (nodeId: number) => {
+        if (isCreatingItem) { alert('You have to complete this item first then create another one') }
         // console.log("oo");
+        console.log(nodeId);
+
 
         // if (!inputName.trim()) return; // Prevent adding empty folder names
 
@@ -38,11 +44,11 @@ const TreeComponent: React.FC = () => {
 
         // Reset the input
         setInputName('');
-        setIsInputVisible(false);
+        setIsCreatingItem(false);
     };
 
     const renderTree = (nodes: TreeNode[]) => {
-        console.log(nodes);
+
 
         return nodes.map((node) => (
             <Fragment key={node.id}>

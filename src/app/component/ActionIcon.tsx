@@ -15,19 +15,29 @@ interface Props {
 const ActionIcon: React.FC<Props> = ({ addFile = true, addFolder = true, deleteItem = true, nodeId }) => {
     // const [tree, setTree] = useState<TreeNode[]>(initialTree);
     //   const { treeData, setTreeData } = setTreeData();
-    const { treeData, setTreeData, inputName, setIsInputVisible } = useTreeData();
+    const { treeData, setTreeData, inputName, setIsCreatingItem, isCreatingItem } = useTreeData();
 
-    const handleAddFileNode = (parentId: number, nodeName: string) => {
-        setIsInputVisible(true)
-        const newNode: TreeNode = { id: Date.now(), name: nodeName, children: [], type: 'file' };
-        setTreeData((prevTree: any) => addNode(prevTree, parentId, newNode));
+    const handleAddNode = (parentId: number, nodeName: string, type: 'file' | 'folder') => {
+        if (isCreatingItem) { alert('You have to complete this item first then create another one') }
+        else {
+            setIsCreatingItem(true)
+            const newNode: TreeNode = {
+                id: Date.now(), name: nodeName, children: [], type,
+                visibleIcon: false
+            };
+            setTreeData((prevTree: any) => addNode(prevTree, parentId, newNode));
+        }
+
     };
 
-    const handleAddFolderNode = (parentId: number, nodeName: string) => {
-        setIsInputVisible(true)
-        const newNode: TreeNode = { id: Date.now(), name: nodeName, children: [], type: 'folder' };
-        setTreeData((prevTree: any) => addNode(prevTree, parentId, newNode));
-    };
+    // const handleAddFolderNode = (parentId: number, nodeName: string) => {
+    //     setIsCreatingItem(true)
+    //     const newNode: TreeNode = {
+    //         id: Date.now(), name: nodeName, children: [], type: 'folder',
+    //         visibleIcon: false
+    //     };
+    //     setTreeData((prevTree: any) => addNode(prevTree, parentId, newNode));
+    // };
 
 
     const handleRemoveNode = (nodeId: number) => {
@@ -37,10 +47,10 @@ const ActionIcon: React.FC<Props> = ({ addFile = true, addFolder = true, deleteI
 
     return (
         <div className='img-container'>
-            {addFile && <button onClick={() => handleAddFileNode(nodeId, inputName)} >
+            {addFile && <button onClick={() => handleAddNode(nodeId, inputName, 'file')} >
                 <Image src={`add-file.svg`} alt={'add-file'} width="30" height="30" />
             </button>}
-            {addFolder && <button onClick={() => handleAddFolderNode(nodeId, inputName)}><Image src={`add-folder.svg`} alt={'add-folder'} width="30" height="30" /></button>}
+            {addFolder && <button onClick={() => handleAddNode(nodeId, inputName, 'folder')}><Image src={`add-folder.svg`} alt={'add-folder'} width="30" height="30" /></button>}
             {deleteItem && <button onClick={() => handleRemoveNode(nodeId)}>
                 <Image src={`delete.svg`} alt={'deleted'} width="30" height="30" />
             </button>}
