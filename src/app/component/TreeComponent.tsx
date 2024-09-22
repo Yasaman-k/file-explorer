@@ -10,7 +10,6 @@ import Image from 'next/image'
 
 const TreeComponent: React.FC = () => {
     const { treeData, setTreeData, setInputName, inputName, setIsCreatingItem } = useTreeData();
-    console.log(treeData);
 
     // Example: Initialize tree data
     useEffect(() => {
@@ -44,7 +43,6 @@ const TreeComponent: React.FC = () => {
         return nodes.map((node) => (
             <Fragment key={node.id}>
                 <div key={node.id} className='child-component flex' style={{ alignItems: 'center', marginTop: '20px', gap: '20px' }}>
-
                     {node.name !== '' ?
                         <div onClick={() => { updateIconVisible(treeData, node.id, !node.visibleIcon) }}>
                             <BoxItem
@@ -60,7 +58,6 @@ const TreeComponent: React.FC = () => {
                             </div>
                             <button className='plus-input' style={{ marginLeft: '20px', padding: '8px' }} onClick={() => handleUpdateNode(node.id, node.type)}>+</button>
                         </div>}
-
 
                     {node.visibleIcon && (node.type === 'folder' ? < ActionIcon nodeId={node.id} /> : < ActionIcon addFile={false} addFolder={false} nodeId={node.id} />)}
                 </div>
