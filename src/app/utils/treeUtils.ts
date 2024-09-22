@@ -33,15 +33,6 @@ export const updateNode = (tree: TreeNode[], nodeId: number, newName: string): T
 export const updateNodeIcon = (tree: TreeNode[], nodeId: number, visibleIcon: boolean): TreeNode[] => {
   return tree.map((node) => {
     if (node.id === nodeId) {
-      // Update the node's name
-
-      // add suffix
-      // if (node.type === 'file') {
-      //   const lastFullStopIndex = newName.lastIndexOf('.');
-      //   const suffix = newName.slice(lastFullStopIndex + 1);
-      //   return { ...node, name: newName, suffix };
-      // }
-      // this is folder
       return { ...node, visibleIcon };
     } else if (node.children.length > 0) {
       // Recursively check the children
