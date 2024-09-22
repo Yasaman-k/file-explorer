@@ -16,8 +16,6 @@ const TreeComponent: React.FC = () => {
         const initialTree = [{ id: 1, name: 'Root', children: [], type: 'folder', visibleIcon: true }];
         setTreeData(initialTree);
     }, [setTreeData]);
-    console.log(treeData);
-
 
     const handleUpdateNode = (nodeId: number, type: string) => {
         if (!inputName.trim()) alert('you cant create empty item'); // Prevent adding empty folder names

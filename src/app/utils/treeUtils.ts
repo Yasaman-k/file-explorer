@@ -17,16 +17,12 @@ export const findNodeById = (tree: TreeNode[], nodeId: number): TreeNode | null 
 export const updateNode = (tree: TreeNode[], nodeId: number, newName: string): TreeNode[] => {
   return tree.map((node) => {
     if (node.id === nodeId) {
-      // Update the node's name
-      console.log('hi');
-
       // add suffix
       if (node.type === 'file') {
         const lastFullStopIndex = newName.lastIndexOf('.');
         const suffix = newName.slice(lastFullStopIndex + 1);
         return { ...node, name: newName, suffix };
       }
-      // this is folder
       return { ...node, name: newName };
     } else if (node.children.length > 0) {
       // Recursively check the children
