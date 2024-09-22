@@ -1,7 +1,5 @@
 import { TreeNode } from '../types/treeTypes';
 
-// search if folder of file is not repetetive
-
 // Find a node in the tree by its ID
 export const findNodeById = (tree: TreeNode[], nodeId: number): TreeNode | null => {
   for (const node of tree) {
