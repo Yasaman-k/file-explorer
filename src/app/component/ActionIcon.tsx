@@ -21,11 +21,10 @@ const ActionIcon: React.FC<Props> = ({ addFile = true, addFolder = true, deleteI
             setIsCreatingItem(true)
             const newNode: TreeNode = {
                 id: Date.now(), name: nodeName, children: [], type,
-                visibleIcon: false
+                visibleIcon: false, ...(type === 'file' && { suffix: 'txt' })
             };
             setTreeData((prevTree: any) => addNode(prevTree, parentId, newNode));
         }
-
     };
 
     const handleRemoveNode = (nodeId: number) => {

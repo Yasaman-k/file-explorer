@@ -27,6 +27,8 @@ const TreeComponent: React.FC = () => {
         const updateTreeData = updateNode(treeData, nodeId, inputName)
 
         // Update the tree data
+        console.log(updateTreeData);
+
         setTreeData(updateTreeData);
 
         // Reset the input
@@ -38,18 +40,16 @@ const TreeComponent: React.FC = () => {
         return nodes.map((node) => (
             <Fragment key={node.id}>
                 <div key={node.id} className='child-component' style={{ display: "flex", alignItems: 'center', marginTop: '20px', gap: '20px' }}>
-                    {node.name !== '' ? <BoxItem text={node.name} image={`${node.type}.svg`} />
+                    {node.name !== '' ? <BoxItem text={node.name} image={(node.type === 'file' ? ((node.suffix !== 'txt' || 'html') && 'txt') : node.type) + '.svg'} />
                         : <div className='input-box flex'>
                             <div style={{ position: 'relative' }}>
                                 <input onChange={(e) => setInputName(e.target.value)} type='text' style={{ background: '#e7e7e7', paddingLeft: '34px' }} className='box-style' />
-                                <Image style={{ position: 'absolute', top: '20%', paddingLeft: '10px', left: 0 }} src={`text.svg`} alt={node.type} width="25" height="20" />
+                                {node.type === 'folder' && <Image alt={node.type} src={node.type + '.svg'} style={{ position: 'absolute', top: '20%', paddingLeft: '10px', left: 0 }} width="25" height="20" />}
                             </div>
                             <button style={{ marginLeft: '20px', padding: '8px' }} onClick={() => handleUpdateNode(node.id)}>+</button>
                         </div>}
 
                     {node.visibleIcon && <ActionIcon nodeId={node.id} />}
-
-
                 </div>
                 {node.children.length > 0 && <div className='parent-component' style={{ marginLeft: '20px', marginTop: '20px' }}>{renderTree(node.children)}</div>}
             </Fragment>
