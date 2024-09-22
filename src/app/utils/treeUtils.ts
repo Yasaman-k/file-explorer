@@ -32,3 +32,21 @@ export const updateNode = (tree: TreeNode[], nodeId: number, newName: string): T
     return node;
   });
 };
+
+// Function to search for a repetitive node name
+export const isNameRepetitive = (tree: TreeNode[], nodeName: string): boolean => {
+  for (const node of tree) {
+    // Check if the current node's name matches
+    if (node.name === nodeName) {
+      return true;
+    }
+
+    // Recursively check the children
+    if (node.children.length > 0) {
+      if (isNameRepetitive(node.children, nodeName)) {
+        return true;
+      }
+    }
+  }
+  return false;
+};

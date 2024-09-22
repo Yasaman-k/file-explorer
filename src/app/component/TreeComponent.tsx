@@ -1,7 +1,7 @@
 
 'use client'
 import React, { Fragment, useEffect, useState } from 'react';
-import { updateNode } from '../utils/treeUtils';
+import { isNameRepetitive, updateNode } from '../utils/treeUtils';
 import { TreeNode } from '../types/treeTypes';
 import BoxItem from './BoxItem';
 import ActionIcon from './ActionIcon';
@@ -11,7 +11,6 @@ import Image from 'next/image'
 const TreeComponent: React.FC = () => {
     const { treeData, setTreeData, setInputName, inputName, isCreatingItem, setIsCreatingItem } = useTreeData();
 
-
     // Example: Initialize tree data
     useEffect(() => {
         const initialTree = [{ id: 1, name: 'Root', children: [], type: 'folder', visibleIcon: true }];
@@ -19,21 +18,21 @@ const TreeComponent: React.FC = () => {
     }, [setTreeData]);
 
 
-
-
     const handleUpdateNode = (nodeId: number) => {
         if (!inputName.trim()) alert('you cant create empty item'); // Prevent adding empty folder names
+        else {
+            if (isNameRepetitive(treeData, inputName)) alert(`item is existed`)
+            else {
+                const updateTreeData = updateNode(treeData, nodeId, inputName)
 
-        const updateTreeData = updateNode(treeData, nodeId, inputName)
+                // Update the tree data
+                setTreeData(updateTreeData);
 
-        // Update the tree data
-        console.log(updateTreeData);
-
-        setTreeData(updateTreeData);
-
-        // Reset the input
-        setInputName('');
-        setIsCreatingItem(false);
+                // Reset the input
+                setInputName('');
+                setIsCreatingItem(false);
+            }
+        }
     };
 
     const renderTree = (nodes: TreeNode[]) => {
