@@ -1,6 +1,6 @@
 
 'use client'
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { addNode, removeNode } from '../services/treeService';
 import { findNodeById } from '../utils/treeUtils';
 import { TreeNode } from '../types/treeTypes';
@@ -9,32 +9,64 @@ import ActionIcon from './ActionIcon';
 import { useTreeData } from '../context/TreeContext';
 
 const TreeComponent: React.FC = () => {
-    const { treeData, setTreeData } = useTreeData();
+    const { treeData, setTreeData, setInputName, inputName, isInputVisible, setIsInputVisible } = useTreeData();
+
 
     // Example: Initialize tree data
     useEffect(() => {
-        const initialTree = [{ id: 1, name: 'Root', children: [] }];
+        const initialTree = [{ id: 1, name: 'Root', children: [], type: 'folder', visibleIcon: true }];
         setTreeData(initialTree);
     }, [setTreeData]);
+
+    const handleUpdateNode = (nodeId: number) => {
+        // console.log("oo");
+
+        // if (!inputName.trim()) return; // Prevent adding empty folder names
+
+        // Create the new folder (node)
+        console.log(treeData, "data");
+
+        const x = treeData.find((tree: any) => tree.id === nodeId)
+        console.log(x, 'ppp');
+
+
+        // Assuming we're adding to the root node
+        // const updatedTree = { ...treeData, children: [...treeData.children, newFolder] };
+
+        // Update the tree data
+        // setTreeData(updatedTree);
+
+        // Reset the input
+        setInputName('');
+        setIsInputVisible(false);
+    };
 
     const renderTree = (nodes: TreeNode[]) => {
         console.log(nodes);
 
         return nodes.map((node) => (
-            <li key={node.id} style={{ display: "flex", alignItems: 'center', gap: '20px' }}>
-                <BoxItem text={node.name} image='folder.svg' />
-                <ActionIcon nodeId={node.id} />
-                {node.children.length > 0 && <ul>{renderTree(node.children)}</ul>}
-            </li>
+            <Fragment key={node.id}>
+                <div key={node.id} className='child-component' style={{ display: "flex", alignItems: 'center', marginTop: '20px', gap: '20px' }}>
+                    {node.name !== '' ? <BoxItem text={node.name} image={`text.svg`} />
+                        : <div className='input-box'>
+                            <input onChange={(e) => setInputName(e.target.value)} type='text' style={{ border: 'none', background: '#e7e7e7', outline: 'none' }} className='box-style' />
+                            <button style={{ paddingLeft: '10px' }} onClick={() => handleUpdateNode(node.id)}>+</button>
+                        </div>}
+
+                    {node.visibleIcon && <ActionIcon nodeId={node.id} />}
+
+
+                </div>
+                {node.children.length > 0 && <div className='parent-component' style={{ marginLeft: '20px', marginTop: '20px' }}>{renderTree(node.children)}</div>}
+            </Fragment>
         ));
     };
 
-    console.log(treeData ? 'hi' : 'none');
-
     return (
         <div style={{ padding: '4rem' }}>
-
-            {treeData ? <ul>{renderTree(treeData)}</ul> : <p>Loading ...</p>}
+            {treeData ? <div className='root-container' >
+                {renderTree(treeData)}
+            </div> : <p>Loading ...</p>}
         </div>
     );
 };

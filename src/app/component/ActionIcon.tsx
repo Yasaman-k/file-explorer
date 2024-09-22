@@ -9,18 +9,26 @@ interface Props {
     addFile?: boolean;
     addFolder?: boolean;
     deleteItem?: boolean;
-    nodeId: number
+    nodeId: number;
 }
 
 const ActionIcon: React.FC<Props> = ({ addFile = true, addFolder = true, deleteItem = true, nodeId }) => {
     // const [tree, setTree] = useState<TreeNode[]>(initialTree);
     //   const { treeData, setTreeData } = setTreeData();
-    const { treeData, setTreeData } = useTreeData();
+    const { treeData, setTreeData, inputName, setIsInputVisible } = useTreeData();
 
-    const handleAddNode = (parentId: number, nodeName: string) => {
-        const newNode: TreeNode = { id: Date.now(), name: nodeName, children: [] };
+    const handleAddFileNode = (parentId: number, nodeName: string) => {
+        setIsInputVisible(true)
+        const newNode: TreeNode = { id: Date.now(), name: nodeName, children: [], type: 'file' };
         setTreeData((prevTree: any) => addNode(prevTree, parentId, newNode));
     };
+
+    const handleAddFolderNode = (parentId: number, nodeName: string) => {
+        setIsInputVisible(true)
+        const newNode: TreeNode = { id: Date.now(), name: nodeName, children: [], type: 'folder' };
+        setTreeData((prevTree: any) => addNode(prevTree, parentId, newNode));
+    };
+
 
     const handleRemoveNode = (nodeId: number) => {
         setTreeData((prevTree: any) => removeNode(prevTree, nodeId));
@@ -29,10 +37,10 @@ const ActionIcon: React.FC<Props> = ({ addFile = true, addFolder = true, deleteI
 
     return (
         <div className='img-container'>
-            {addFile && <button onClick={() => handleAddNode(nodeId, 'New Node')} >
+            {addFile && <button onClick={() => handleAddFileNode(nodeId, inputName)} >
                 <Image src={`add-file.svg`} alt={'add-file'} width="30" height="30" />
             </button>}
-            {addFolder && <button onClick={() => handleAddNode(nodeId, 'New Parent')}><Image src={`add-folder.svg`} alt={'add-folder'} width="30" height="30" /></button>}
+            {addFolder && <button onClick={() => handleAddFolderNode(nodeId, inputName)}><Image src={`add-folder.svg`} alt={'add-folder'} width="30" height="30" /></button>}
             {deleteItem && <button onClick={() => handleRemoveNode(nodeId)}>
                 <Image src={`delete.svg`} alt={'deleted'} width="30" height="30" />
             </button>}
