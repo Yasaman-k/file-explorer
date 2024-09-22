@@ -1,6 +1,5 @@
 'use client'
 import Image from 'next/image'
-import { useState } from 'react';
 import { TreeNode } from '../types/treeTypes';
 import { addNode, removeNode } from '../services/treeService';
 import { useTreeData } from '../context/TreeContext';
@@ -13,8 +12,7 @@ interface Props {
 }
 
 const ActionIcon: React.FC<Props> = ({ addFile = true, addFolder = true, deleteItem = true, nodeId }) => {
-    // const [tree, setTree] = useState<TreeNode[]>(initialTree);
-    //   const { treeData, setTreeData } = setTreeData();
+
     const { treeData, setTreeData, inputName, setIsCreatingItem, isCreatingItem } = useTreeData();
 
     const handleAddNode = (parentId: number, nodeName: string, type: 'file' | 'folder') => {
@@ -29,16 +27,6 @@ const ActionIcon: React.FC<Props> = ({ addFile = true, addFolder = true, deleteI
         }
 
     };
-
-    // const handleAddFolderNode = (parentId: number, nodeName: string) => {
-    //     setIsCreatingItem(true)
-    //     const newNode: TreeNode = {
-    //         id: Date.now(), name: nodeName, children: [], type: 'folder',
-    //         visibleIcon: false
-    //     };
-    //     setTreeData((prevTree: any) => addNode(prevTree, parentId, newNode));
-    // };
-
 
     const handleRemoveNode = (nodeId: number) => {
         setTreeData((prevTree: any) => removeNode(prevTree, nodeId));

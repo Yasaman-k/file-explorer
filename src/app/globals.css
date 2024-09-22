@@ -73,4 +73,11 @@ button:hover {
   transform: 50% 50%;
 }
 
-/* MODAL CSS */
+input {
+  border: none;
+  outline: none;
+}
+
+.flex {
+  display: flex;
+}

@@ -1,14 +1,5 @@
 import { TreeNode } from '../types/treeTypes';
 
-const addTreeNodeFile = () => {};
-const removeTreeNode = () => {
-  // if it is parent must remove all children
-};
-
-const addTreeNodeFolder = () => {
-  // it is a parent
-};
-
 // search if folder of file is not repetetive
 
 // Find a node in the tree by its ID
@@ -21,4 +12,17 @@ export const findNodeById = (tree: TreeNode[], nodeId: number): TreeNode | null 
     }
   }
   return null;
+};
+
+export const updateNode = (tree: TreeNode[], nodeId: number, newName: string): TreeNode[] => {
+  return tree.map((node) => {
+    if (node.id === nodeId) {
+      // Update the node's name
+      return { ...node, name: newName };
+    } else if (node.children.length > 0) {
+      // Recursively check the children
+      return { ...node, children: updateNode(node.children, nodeId, newName) };
+    }
+    return node;
+  });
 };
