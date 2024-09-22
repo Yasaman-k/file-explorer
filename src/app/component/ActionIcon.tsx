@@ -13,7 +13,7 @@ interface Props {
 
 const ActionIcon: React.FC<Props> = ({ addFile = true, addFolder = true, deleteItem = true, nodeId }) => {
 
-    const { treeData, setTreeData, inputName, setIsCreatingItem, isCreatingItem } = useTreeData();
+    const { setTreeData, inputName, setIsCreatingItem, isCreatingItem } = useTreeData();
 
     const handleAddNode = (parentId: number, nodeName: string, type: 'file' | 'folder') => {
         if (isCreatingItem) { alert('You have to complete this item first then create another one') }
