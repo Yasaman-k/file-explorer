@@ -26,8 +26,8 @@ const ActionIcon: React.FC<Props> = ({ addFile = true, addFolder = true, deleteI
         }
     };
 
-    const handleRemoveNode = (nodeId: number) => {
-        setTreeData((prevTree: any) => removeNode(prevTree, nodeId));
+    const handleRemoveNode = (currenTnodeId: number) => {
+        setTreeData((prevTree: any) => removeNode(prevTree, currenTnodeId));
     };
 
     return (
