@@ -62,7 +62,9 @@ const TreeComponent: React.FC = () => {
                     {node.visibleIcon && (node.type === 'folder' ? < ActionIcon nodeId={node.id} /> : < ActionIcon addFile={false} addFolder={false} nodeId={node.id} />)}
                 </div>
 
-                {node.children.length > 0 && <div className='parent-component' style={{ marginLeft: '20px', marginTop: '20px', visibility: `${!node.visibleIcon ? 'hidden' : 'visible'}` }}>{renderTree(node.children)}</div>}
+                {node.children.length > 0 && <div className='parent-component' style={{ marginLeft: '20px', marginTop: '20px', visibility: `${!node.visibleIcon ? 'hidden' : 'visible'}` }}>
+                    {renderTree(node.children)}
+                </div>}
             </Fragment >
         ));
     };
